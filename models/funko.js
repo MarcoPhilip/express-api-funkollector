@@ -128,13 +128,13 @@ const funkoSchema = mongoose.Schema({
         type: String,
         required: false,
     },
-    image: {
-        required: true,
-    },
-    owner: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-    }
+    // image: {
+    //     required: true,
+    // },
+    // owner: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'User',
+    // }
 });
 
 const Funko = mongoose.model('Funko', funkoSchema);

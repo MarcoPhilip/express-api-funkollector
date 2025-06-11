@@ -8,9 +8,9 @@ const logger = require('morgan');
 
 // Import the controller files below
 const funkoRouter = require('./controllers/funkos');
-const collectionRouter = require('./controllers/collections');
-const wishlistRouter = require('./controllers/wishlists');
-const userRouter = require('./controllers/users');
+// const collectionRouter = require('./controllers/collections');
+// const wishlistRouter = require('./controllers/wishlists');
+// const userRouter = require('./controllers/users');
 
 
 mongoose.connect(process.env.MONGODB_URI);
@@ -25,9 +25,9 @@ app.use(logger('dev'));
 
 // Routes go here
 app.use('/funkos', funkoRouter);
-app.use('/collections', collectionRouter);
-app.use('/wishlists', wishlistRouter);
-app.use('/users', userRouter);
+// app.use('/collections', collectionRouter);
+// app.use('/wishlists', wishlistRouter);
+// app.use('/users', userRouter);
 
 
 app.listen(3000, () => {
