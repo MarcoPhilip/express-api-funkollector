@@ -12,6 +12,8 @@ const funkoRouter = require('./controllers/funkos');
 // const wishlistRouter = require('./controllers/wishlists');
 // const userRouter = require('./controllers/users');
 
+// Auth controllers
+const testJwtRouter = require('./controllers/test-jwt');
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -23,11 +25,15 @@ app.use(cors());
 app.use(express.json());
 app.use(logger('dev'));
 
-// Routes go here
+//! Routes go here
+
+// Public
 app.use('/funkos', funkoRouter);
 // app.use('/collections', collectionRouter);
 // app.use('/wishlists', wishlistRouter);
 // app.use('/users', userRouter);
+
+app.use('/test-jwt', testJwtRouter);
 
 
 app.listen(3000, () => {
