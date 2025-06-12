@@ -9,9 +9,9 @@ const verifyToken = require('../middleware/verify-token');
 router.get('/', verifyToken, async (req, res) => {
     try {
 
-        const collection = await Collection.findOne({ owner: req.user._id }).populate('funko');
+        const collection = await Collection.findOne({ owner: req.user._id }).populate('funkos');
 
-        // Handle error if funko not found
+        // Handle error if collection is not found
         if (!collection) {
             return res.status(404).json({ error: 'Collection not found.' });
         }
