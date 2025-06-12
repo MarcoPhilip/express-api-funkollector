@@ -5,6 +5,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
+const Collection = require('../models/collection');
+const Wishlist = require('../models/wishlist')
 
 // Add in constant for the number of rounds 
 const saltRounds = 12;
@@ -26,6 +28,18 @@ router.post('/sign-up', async (req, res) => {
       hashedPassword: bcrypt.hashSync(req.body.hashedPassword, saltRounds)
     });
 
+    // Assign a Collection for the user
+    await Collection.create({
+      owner: user._id,
+      funkos: [],
+    });
+
+    // Assign a Wishlist for the user
+    await Wishlist.create({
+      owner: user._id,
+      funkos: [],
+    });
+    
     // Construct the payload
     const payload = { 
         username: user.username, 
