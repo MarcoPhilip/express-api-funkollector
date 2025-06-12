@@ -131,10 +131,10 @@ const funkoSchema = mongoose.Schema({
     // image: {
     //     required: true,
     // },
-    // owner: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',
-    // }
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    }
 });
 
 const Funko = mongoose.model('Funko', funkoSchema);

@@ -8,9 +8,9 @@ const logger = require('morgan');
 
 // Import the controller files below
 const funkoRouter = require('./controllers/funkos');
-// const collectionRouter = require('./controllers/collections');
+const collectionRouter = require('./controllers/collections');
 // const wishlistRouter = require('./controllers/wishlists');
-// const userRouter = require('./controllers/users');
+
 
 // Auth controllers
 const testJwtRouter = require('./controllers/test-jwt');
@@ -36,7 +36,7 @@ app.use('/funkos', funkoRouter);
 app.use('/auth', authRouter);
 app.use('/test-jwt', testJwtRouter);
 app.use('/user', userRouter);
-// app.use('/collections', collectionRouter);
+app.use('/collections', collectionRouter);
 // app.use('/wishlists', wishlistRouter);
 
 

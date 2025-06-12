@@ -2,12 +2,16 @@
 const Funko = require('../models/funko');
 const express = require('express');
 const router = express.Router();
+const verifyToken = require('../middleware/verify-token');
+
 
 // Routes/controller funstions below
 
 // CREATE - POST - /funkos
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
   try {
+    
+    req.body.owner = req.user._id;
 
     const createdFunko = await Funko.create(req.body);
 
@@ -35,7 +39,7 @@ router.get('/:funkoId', async (req, res) => {
 
     const funko = await Funko.findById(req.params.funkoId);
        
-    // Handle error if pet not found
+    // Handle error if funko not found
     if (!funko) {
       res.status(404);
       throw new Error('Funko not found.');
