@@ -15,6 +15,7 @@ const funkoRouter = require('./controllers/funkos');
 // Auth controllers
 const testJwtRouter = require('./controllers/test-jwt');
 const authRouter = require('./controllers/auth');
+const userRouter = require('./controllers/users');
 
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -30,11 +31,13 @@ app.use(logger('dev'));
 
 // Public
 app.use('/funkos', funkoRouter);
-// app.use('/collections', collectionRouter);
-// app.use('/wishlists', wishlistRouter);
-// app.use('/users', userRouter);
+// app.use('/all-users', usersRouter);
+
 app.use('/auth', authRouter);
 app.use('/test-jwt', testJwtRouter);
+app.use('/user', userRouter);
+// app.use('/collections', collectionRouter);
+// app.use('/wishlists', wishlistRouter);
 
 
 app.listen(3000, () => {
