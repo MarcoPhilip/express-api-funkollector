@@ -25,7 +25,7 @@ router.post('/sign-up', async (req, res) => {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       username: req.body.username,
-      hashedPassword: bcrypt.hashSync(req.body.hashedPassword, saltRounds)
+      password: bcrypt.hashSync(req.body.password, saltRounds)
     });
 
     // Assign a Collection for the user
@@ -71,7 +71,7 @@ router.post('/sign-in', async (req, res) => {
 
     // Check if the password is correct using bcrypt
     const isPasswordCorrect = bcrypt.compareSync(
-      req.body.hashedPassword, user.hashedPassword
+      req.body.password, user.password
     );
 
     // If the password is incorrect, return a 401 status code with a message
