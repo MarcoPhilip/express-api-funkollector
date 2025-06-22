@@ -9,7 +9,7 @@ const logger = require('morgan');
 // Import the controller files below
 const funkoRouter = require('./controllers/funkos');
 const collectionRouter = require('./controllers/collections');
-// const wishlistRouter = require('./controllers/wishlists');
+const wishlistRouter = require('./controllers/wishlists');
 
 
 // Auth controllers
@@ -29,15 +29,14 @@ app.use(logger('dev'));
 
 //! Routes go here
 
-// Public
+// Public Routes
 app.use('/funkos', funkoRouter);
-// app.use('/all-users', usersRouter);
-
 app.use('/auth', authRouter);
+// Restricted Routes
 app.use('/test-jwt', testJwtRouter);
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 app.use('/collections', collectionRouter);
-// app.use('/wishlists', wishlistRouter);
+app.use('/wishlists', wishlistRouter);
 
 
 app.listen(3000, () => {

@@ -30,18 +30,19 @@ router.post('/sign-up', async (req, res) => {
 
     // Assign a Collection for the user
     await Collection.create({
-      owner: user._id,
+      owner: user._id.toString(),
       funkos: [],
     });
 
     // Assign a Wishlist for the user
     await Wishlist.create({
-      owner: user._id,
+      owner: user._id.toString(),
       funkos: [],
     });
     
     // Construct the payload
     const payload = { 
+        firstname: user.firstname,
         username: user.username, 
         _id: user._id 
     };
@@ -81,6 +82,7 @@ router.post('/sign-in', async (req, res) => {
 
     // Construct the payload
     const payload = { 
+        firstname: user.firstname,
         username: user.username, 
         _id: user._id 
     };

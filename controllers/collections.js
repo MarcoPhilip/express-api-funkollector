@@ -23,7 +23,7 @@ router.get('/', verifyToken, async (req, res) => {
 });
 
 // CREATE - POST - /collections
-router.post('/funkos', verifyToken, async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
     try {
         
         const collection = await Collection.findOne({ owner: req.user._id });

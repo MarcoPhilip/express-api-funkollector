@@ -10,7 +10,7 @@ const verifyToken = require('../middleware/verify-token');
 // CREATE - POST - /funkos
 router.post('/', verifyToken, async (req, res) => {
   try {
-    
+    console.log(req.body)
     req.body.owner = req.user._id;
 
     const createdFunko = await Funko.create(req.body);
@@ -37,7 +37,7 @@ router.get('/', async (req, res) => {
 router.get('/:funkoId', async (req, res) => {
   try {
 
-    const funko = await Funko.findById(req.params.funkoId);
+    const funko = await Funko.findById(req.params.funkoId).populate('owner');
        
     // Handle error if funko not found
     if (!funko) {
@@ -53,24 +53,32 @@ router.get('/:funkoId', async (req, res) => {
 
 
 // DELETE - DELETE - /funkos/:funkoId
-router.delete('/:funkoId', async (req, res) => {
+router.delete('/:funkoId', verifyToken, async (req, res) => {
   try {
 
-    const deletedFunko = await Funko.findByIdAndDelete(req.params.funkoId);
+    const deletedFunko = await Funko.findById(req.params.funkoId);
     
-    // Handle error if pet not found
+    // Handle error if funko not found
     if(!deletedFunko) {
       return res.status(404).json({ error: 'Funko not found.' });
     }
 
+    // Check if the user owns the funko
+    if (!deletedFunko.owner.equals(req.user._id)) {
+      return res.status(403).json({
+        message: 'You dont own this funko!'
+      })
+    }
+
+    await deletedFunko.deleteOne();
+
     res.status(200).json(deletedFunko);
   } catch (err) {
-    // Add error handling code for 404 errors
-    if (res.statusCode === 404) {
+      // Add error handling code for 404 errors
+      if (res.statusCode === 404) {
     res.json({ err: err.message });
     } else {
-    // Add else statement to handle all other errors
-    res.status(500).json({ err: err.message });
+      res.status(500).json({ error: err.message });
     }
   }
 });
