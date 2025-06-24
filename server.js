@@ -17,6 +17,9 @@ const testJwtRouter = require('./controllers/test-jwt');
 const authRouter = require('./controllers/auth');
 const userRouter = require('./controllers/users');
 
+// Port
+const port = process.env.PORT ? process.env.PORT : '3000';
+
 mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection.on('connected', () => {
@@ -39,6 +42,6 @@ app.use('/collections', collectionRouter);
 app.use('/wishlists', wishlistRouter);
 
 
-app.listen(3000, () => {
-  console.log('The express app is ready!');
+app.listen(port, () => {
+  console.log(`The express app is ready on port ${port}!`);
 });
