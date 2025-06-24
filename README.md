@@ -6,8 +6,6 @@
 
 Welcome to the **Funkollector App**, a full-stack MERN application where all users can submit/add a funko, organize their collections and wishlists.
 
-## 🎮 Features
-
 
 ## 🌐 Links
 → [Deployment Link](https://peninsula-hoopers-league-6dc6db12264c.herokuapp.com/)
@@ -25,6 +23,12 @@ This application uses the following:
 - **Heroku (Back End)** - App host
 - **Vercel (Front End)** - App host
 - **CORS** 
+
+## 🔮 Stretch Goals
+
+- User upload funko images with Cloudinary.
+- Admin user creation and features.
+
 
 
 ## 🎨 Creator
